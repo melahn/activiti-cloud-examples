@@ -14,7 +14,9 @@ spec:
     spec:
       containers:
         - name: rb-my-app
+        #this is your docker image, so it needs to be accessible for the kube cluster to download if you are running in a remote kube
           image: salaboy/rb-my-app:latest
+          imagePullPolicy: Always
           env:
           - name: ACT_RB_HOST
             value: rb-my-app
@@ -44,6 +46,6 @@ spec:
     serviceType: runtime-bundle
   ports:
     - port: 8081
-      targetPort: 8081  
+      targetPort: 8081
   type: ClusterIP
 ---
