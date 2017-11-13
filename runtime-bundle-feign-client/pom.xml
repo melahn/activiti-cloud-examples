@@ -9,6 +9,13 @@
   <name>Activiti Cloud :: Runtime Bundle Feign Client</name>
   <version>1.0.0-SNAPSHOT</version>
 
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.0.M5</version>
+  </parent>
+
   <properties>
     <spring-boot-maven-plugin.version>1.5.4.RELEASE</spring-boot-maven-plugin.version>
     <!--remove property below once this is fixed-->
@@ -33,10 +40,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
+
+
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -50,6 +60,10 @@
       <artifactId>spring-security-oauth2</artifactId>
       <version>2.2.1.BUILD-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
     <!--remove dependencies below once this is fixed-->
     <!--https://github.com/swagger-api/swagger-codegen/issues/5410-->
@@ -58,16 +72,16 @@
       <artifactId>swagger-annotations</artifactId>
       <version>${swagger-core-version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>2.7.5</version>
-    </dependency>
-    <dependency>
-      <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>logging-interceptor</artifactId>
-      <version>3.9.0</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.squareup.okhttp</groupId>-->
+      <!--<artifactId>okhttp</artifactId>-->
+      <!--<version>2.7.5</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>com.squareup.okhttp3</groupId>-->
+      <!--<artifactId>logging-interceptor</artifactId>-->
+      <!--<version>3.9.0</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -78,17 +92,31 @@
       <artifactId>joda-time</artifactId>
       <version>2.9.9</version>
     </dependency>
+
+
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>2.5.4</version>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-admin-client</artifactId>
+      <version>3.3.0.CR2</version>
     </dependency>
+
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <type>jar</type>
-      <version>1.1.0.Final</version>
+      <groupId>org.springframework.hateoas</groupId>
+      <artifactId>spring-hateoas</artifactId>
+      <version>0.24.0.BUILD-SNAPSHOT</version>
     </dependency>
+    <!--comment out, it prevents the boot to start-->
+    <!--<dependency>-->
+    <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--<artifactId>jackson-annotations</artifactId>-->
+    <!--<version>2.5.4</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>javax.validation</groupId>-->
+    <!--<artifactId>validation-api</artifactId>-->
+    <!--<type>jar</type>-->
+    <!--<version>1.1.0.Final</version>-->
+    <!--</dependency>-->
 
   </dependencies>
 
