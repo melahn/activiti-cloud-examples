@@ -54,6 +54,12 @@
       <artifactId>javax.ws.rs-api</artifactId>
       <version>2.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.hateoas</groupId>
+      <artifactId>spring-hateoas</artifactId>
+      <version>0.24.0.BUILD-SNAPSHOT</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -82,7 +88,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jetty</artifactId>
     </dependency>
-
 
 
     <dependency>
@@ -123,15 +128,6 @@
       <version>${keycloak.version}</version>
     </dependency>
 
-
-    <!--<dependency>-->
-      <!--<groupId>org.keycloak</groupId>-->
-      <!--<artifactId>keycloak-tomcat8-adapter-dist</artifactId>-->
-      <!--<version>${keycloak.version}</version>-->
-    <!--</dependency>-->
-
-
-
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-client</artifactId>
@@ -144,34 +140,11 @@
     </dependency>
 
 
-
-
-
-
-
-    <!--<dependency>-->
-      <!--<groupId>io.jmnarloch</groupId>-->
-      <!--<artifactId>feign-oauth2-spring-cloud-starter</artifactId>-->
-      <!--<version>1.0.0</version>-->
-    <!--</dependency>-->
-
-    <!--remove dependencies below once this is fixed-->
-    <!--https://github.com/swagger-api/swagger-codegen/issues/5410-->
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
       <version>${swagger-core-version}</version>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>com.squareup.okhttp</groupId>-->
-      <!--<artifactId>okhttp</artifactId>-->
-      <!--<version>2.7.5</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>com.squareup.okhttp3</groupId>-->
-      <!--<artifactId>logging-interceptor</artifactId>-->
-      <!--<version>3.9.0</version>-->
-    <!--</dependency>-->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
@@ -185,15 +158,15 @@
 
 
     <!--<dependency>-->
-      <!--<groupId>org.keycloak</groupId>-->
-      <!--<artifactId>keycloak-admin-client</artifactId>-->
-      <!--<version>3.3.0.CR2</version>-->
+    <!--<groupId>org.keycloak</groupId>-->
+    <!--<artifactId>keycloak-admin-client</artifactId>-->
+    <!--<version>3.3.0.CR2</version>-->
     <!--</dependency>-->
 
     <!--<dependency>-->
-      <!--<groupId>org.springframework.hateoas</groupId>-->
-      <!--<artifactId>spring-hateoas</artifactId>-->
-      <!--<version>0.24.0.BUILD-SNAPSHOT</version>-->
+    <!--<groupId>org.springframework.hateoas</groupId>-->
+    <!--<artifactId>spring-hateoas</artifactId>-->
+    <!--<version>0.24.0.BUILD-SNAPSHOT</version>-->
     <!--</dependency>-->
 
     <!--comment out, it prevents the boot to start-->

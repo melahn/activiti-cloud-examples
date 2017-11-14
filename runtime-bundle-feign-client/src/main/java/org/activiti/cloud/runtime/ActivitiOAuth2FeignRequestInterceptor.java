@@ -21,48 +21,12 @@ import feign.RequestTemplate;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.AccessTokenResponse;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 @Component
 public class ActivitiOAuth2FeignRequestInterceptor implements RequestInterceptor {
 
     private static final String AUTHORIZATION = "Authorization";
-
-    private static final String BEARER_TOKEN_TYPE = "Bearer";
-
-    private static final String AUTHORIZATION_HEADER = "Authorization";
-
-
-//    private final OAuth2ClientContext oauth2ClientContext;
-//
-//    public ActivitiOAuth2FeignRequestInterceptor(OAuth2ClientContext oauth2ClientContext) {
-//        Assert.notNull(oauth2ClientContext,
-//                       "Context can not be null");
-//        this.oauth2ClientContext = oauth2ClientContext;
-//    }
-
-//    @Override
-//    public void apply(RequestTemplate template) {
-//
-//
-//
-//
-//        if (template.headers().containsKey(AUTHORIZATION_HEADER)) {
-//            System.out.println("The Authorization token has been already set");
-//        } else if (oauth2ClientContext.getAccessTokenRequest().getExistingToken() == null) {
-//            System.out.println("Can not obtain existing token for request, if it is a non secured request, ignore.");
-//        } else {
-//            System.out.println("Constructing Header {} for Token {}" + AUTHORIZATION_HEADER +  BEARER_TOKEN_TYPE);
-//            template.header(AUTHORIZATION_HEADER, String.format("%s %s", BEARER_TOKEN_TYPE,
-//                                                                oauth2ClientContext.getAccessTokenRequest().getExistingToken().toString()));
-//        }
-//    }
-
 
     @Value("${keycloak.auth-server-url}")
     protected String authServer;
@@ -79,23 +43,31 @@ public class ActivitiOAuth2FeignRequestInterceptor implements RequestInterceptor
     @Value("${keycloaktestpassword}")
     protected String keycloaktestpassword;
 
-
     @Override
     public void apply(RequestTemplate template) {
         AccessTokenResponse details = getDetails();
         String headerValue = String.format("%s %s",
                                            details.getTokenType(),
                                            details.getToken());
-        //httpRequest.getHeaders().set(AUTHORIZATION_HEADER, "Bearer " + token.getToken());
-            template.header(AUTHORIZATION,
+        template.header(AUTHORIZATION,
                         headerValue);
     }
 
     protected AccessTokenResponse getDetails() {
-
-        System.out.println("somehting");
-        AccessTokenResponse token = Keycloak.getInstance(authServer, realm, keycloaktestuser, keycloaktestpassword, resource).tokenManager().getAccessToken();
-
+        AccessTokenResponse token = Keycloak.getInstance(authServer,
+                                                         realm,
+                                                         keycloaktestuser,
+                                                         keycloaktestpassword,
+                                                         resource).tokenManager().getAccessToken();
         return token;
     }
+
+//    @Override
+//    public ClientHttpResponse intercept(HttpRequest httpRequest,
+//                                        byte[] bytes,
+//                                        ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
+//        AccessTokenResponse token = getDetails();
+//        httpRequest.getHeaders().set(AUTHORIZATION, "Bearer " + token.getToken());
+//        return clientHttpRequestExecution.execute(httpRequest, bytes);
+//    }
 }

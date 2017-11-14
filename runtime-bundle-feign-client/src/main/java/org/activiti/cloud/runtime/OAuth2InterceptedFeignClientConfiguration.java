@@ -18,43 +18,15 @@ package org.activiti.cloud.runtime;
 
 import java.io.IOException;
 
-import feign.Feign;
 import feign.RequestInterceptor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
-import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 
 @Configuration
-@ConditionalOnClass({ Feign.class })
-@ConditionalOnProperty(value = "feign.oauth2.enabled", matchIfMissing = true)
 public class OAuth2InterceptedFeignClientConfiguration {
 
-
-//    @Bean(name = "oauth2RequestInterceptor")
     @Bean
     public RequestInterceptor getOAuth2RequestInterceptor() throws IOException {
         return new ActivitiOAuth2FeignRequestInterceptor();
     }
-
-//    @Bean
-//    @ConditionalOnBean(OAuth2ClientContext.class)
-//    public RequestInterceptor activitiOAuth2FeignRequestInterceptor(OAuth2ClientContext oauth2ClientContext){
-//        return new ActivitiOAuth2FeignRequestInterceptor(oauth2ClientContext);
-//    }
-//
-//    @Bean
-//    public DefaultOAuth2ClientContext oauth2ClientContext() {
-//        return new DefaultOAuth2ClientContext(new DefaultAccessTokenRequest());
-//    }
-
-
 }

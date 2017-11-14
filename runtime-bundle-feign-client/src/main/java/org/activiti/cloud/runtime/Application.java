@@ -16,34 +16,54 @@
 
 package org.activiti.cloud.runtime;
 
+import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@EnableFeignClients(basePackages = {"io.swagger.api","org.activiti.cloud.runtime"})
+@EnableFeignClients(basePackages = {"io.swagger.api", "org.activiti.cloud.runtime"})
 @SpringBootApplication(exclude = org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class)
-public class Application {
+public class Application extends WebMvcConfigurerAdapter {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class,
+                              args);
+    }
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
+
+    @Autowired
+    private HalHttpMessageConverter halHttpMessageConverter;
+
+//	@Autowired
+//	private ActivitiOAuth2FeignRequestInterceptor activitiOAuth2FeignRequestInterceptor;
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(halHttpMessageConverter);
+        super.configureMessageConverters(converters);
+    }
 
 //	@Bean
-//	public MyErrorDecoder myErrorDecoder() {
-//		return new MyErrorDecoder();
+//	public RestTemplateBuilder restTemplateBuilder() {
+//		ObjectMapper mapper = new ObjectMapper();
+//		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		mapper.registerModule(new Jackson2HalModule());
+//
+//		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//		converter.setSupportedMediaTypes(MediaType.parseMediaTypes("application/hal+json"));
+//		converter.setObjectMapper(mapper);
+//
+//		return new RestTemplateBuilder().additionalMessageConverters(converter).additionalInterceptors(activitiOAuth2FeignRequestInterceptor);
 //	}
-
 }
