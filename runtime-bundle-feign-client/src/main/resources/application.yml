@@ -1,8 +1,8 @@
 server.port: 8090
 
-keycloak.auth-server-url: http://activiti-cloud-sso-idm-kub:30081/auth
-keycloak.realm: springboot
-keycloak.resource: activiti
-
-keycloakclientuser: client
-keycloakclientpassword: client
+#keycloak.auth-server-url: http://activiti-cloud-sso-idm-kub:30081/auth
+#keycloak.realm: springboot
+#keycloak.resource: activiti
+#
+#keycloakclientuser: client
+#keycloakclientpassword: client
