@@ -19,10 +19,13 @@ package org.activiti.cloud.runtime;
 
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @EnableFeignClients(basePackages = {"io.swagger.api","org.activiti.cloud.runtime"})
@@ -37,5 +40,10 @@ public class Application {
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
 	}
+
+//	@Bean
+//	public MyErrorDecoder myErrorDecoder() {
+//		return new MyErrorDecoder();
+//	}
 
 }

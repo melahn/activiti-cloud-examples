@@ -6,3 +6,32 @@ server.port: 8090
 #
 #keycloakclientuser: client
 #keycloakclientpassword: client
+
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+
+#feign.oauth2.enabled: true
+
+
+
+keycloak.auth-server-url: http://activiti-cloud-sso-idm-kub:30081/auth
+keycloak.realm: springboot
+keycloak.resource: activiti
+#keycloak.public-client: true
+
+
+#keycloak.principal-attribute: preferred-username
+# see https://issues.jboss.org/browse/KEYCLOAK-810 for configuration options
+
+keycloakadminclientapp: admin-cli
+keycloaktestuser: hruser
+keycloaktestpassword: password
+
+#eureka.client.enabled=false

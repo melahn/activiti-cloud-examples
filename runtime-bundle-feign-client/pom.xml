@@ -21,6 +21,9 @@
     <!--remove property below once this is fixed-->
     <!--https://github.com/swagger-api/swagger-codegen/issues/5410-->
     <swagger-core-version>1.5.15</swagger-core-version>
+    <keycloak.version>3.3.0.CR2</keycloak.version>
+    <keycloak.snapshot.version>3.4.0.CR1-SNAPSHOT</keycloak.snapshot.version>
+    <resteasy.version>3.1.4.Final</resteasy.version>
   </properties>
 
   <dependencyManagement>
@@ -46,6 +49,11 @@
 
   <dependencies>
 
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.1</version>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -63,7 +71,89 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
+
+
+
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-admin-client</artifactId>
+      <version>${keycloak.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-core</artifactId>
+      <version>${keycloak.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-adapter-core</artifactId>
+      <version>${keycloak.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-spring-security-adapter</artifactId>
+      <version>${keycloak.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-spring-boot-adapter-core</artifactId>
+      <version>${keycloak.snapshot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-spring-boot-2-adapter</artifactId>
+      <version>${keycloak.snapshot.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-jetty94-adapter</artifactId>
+      <version>${keycloak.version}</version>
+    </dependency>
+
+
+    <!--<dependency>-->
+      <!--<groupId>org.keycloak</groupId>-->
+      <!--<artifactId>keycloak-tomcat8-adapter-dist</artifactId>-->
+      <!--<version>${keycloak.version}</version>-->
+    <!--</dependency>-->
+
+
+
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson2-provider</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+
+
+
+
+
+
+
+    <!--<dependency>-->
+      <!--<groupId>io.jmnarloch</groupId>-->
+      <!--<artifactId>feign-oauth2-spring-cloud-starter</artifactId>-->
+      <!--<version>1.0.0</version>-->
+    <!--</dependency>-->
 
     <!--remove dependencies below once this is fixed-->
     <!--https://github.com/swagger-api/swagger-codegen/issues/5410-->
