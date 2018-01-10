@@ -35,6 +35,8 @@ For logging you'll want as much ram as you can for for minikube. If you don't wa
 
 To tail pod logs do `kubectl logs -f --since=10000s <PODNAME>`
 
+To use autoscaling also do `minikube addons enable heapster` and check with `minikube addons open heapster`
+
 ## What you'll see
 
 In the logs for the ranking connector you'll see the tweets that are being matched to the campaign's topic. You'll also see the top-ranked authors based on tweets posted in the last period.
