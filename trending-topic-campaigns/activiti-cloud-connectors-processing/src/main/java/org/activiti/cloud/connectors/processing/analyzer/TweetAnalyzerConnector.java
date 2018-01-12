@@ -22,6 +22,9 @@ public class TweetAnalyzerConnector {
     @Value("${spring.application.name}")
     private String appName;
 
+    @Value("${analysis.enabled:true}")
+    private Boolean enabled;
+
     private final MessageChannel integrationResultsProducer;
 
     public TweetAnalyzerConnector(MessageChannel integrationResultsProducer) {
@@ -35,12 +38,15 @@ public class TweetAnalyzerConnector {
 
         Map<String, Object> results = new HashMap<>();
 
-        // based on http://rahular.com/twitter-sentiment-analysis/
-        // note you get a lot of 1s but there are some zeros if you search for "attitude: 0"
-        results.put("attitude",
-                NLP.findSentiment(tweet));
-
-        logger.info(append("service-name", appName),"analyzed tweet with sentiment "+results.get("attitude"));
+        if(enabled) {
+            // based on http://rahular.com/twitter-sentiment-analysis/
+            results.put("attitude",
+                    NLP.findSentiment(tweet));
+            logger.info(append("service-name", appName), "analyzed tweet with sentiment " + results.get("attitude"));
+        } else{
+            results.put("attitude",
+                    1);
+        }
 
         IntegrationResultEvent ire = new IntegrationResultEvent(event.getExecutionId(),
                                                                 results);

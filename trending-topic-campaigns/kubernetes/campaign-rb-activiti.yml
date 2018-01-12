@@ -14,6 +14,7 @@ spec:
       containers:
         - name: postgres-activiti
           image: postgres
+          imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 5432
           env:
@@ -56,8 +57,8 @@ spec:
             periodSeconds: 40
           resources:
             limits:
-              cpu: 1000m
-              memory: 1000Mi
+              cpu: 2000m
+              memory: 1200Mi
             requests:
               cpu: 100m
               memory: 400Mi
@@ -86,21 +87,25 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: kube,local
           - name: JAVA_OPTS
-            value: -Xmx256m -Xms256m
+            value: -Xmx512m -Xms256m
 ---
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: english-campaign-activiti
   namespace: default
 spec:
-  maxReplicas: 3
+  maxReplicas: 2
   minReplicas: 1
   scaleTargetRef:
     apiVersion: v1
     kind: Deployment
     name: english-campaign-activiti
-  targetCPUUtilizationPercentage: 80
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageValue: 0.45G
 ---
 apiVersion: v1
 kind: Service
