@@ -50,6 +50,18 @@ services:
       - ACT_MODELING_HOST=modeling-app
       - ACT_MODELING_APP_NAME=modeling-app
       - ACT_CLOUD_CONFIG_SERVER_ENABLED=false
+  activiti-cloud-notifications:
+    image: activiti/activiti-cloud-notifications:latest
+    ports:
+      - 8183:8183
+    external_links:
+      - activiti-cloud-sso-idm
+      - activiti-cloud-registry
+      - rabbitmq
+    environment:
+      - ACT_NOTIF_PORT=8183
+      - JAVA_OPTS=-Xmx128m -Xms128m
+      - ACT_CLOUD_CONFIG_SERVER_ENABLED=false
   # We define the name and the base image of our Runtime Bundle
   rb-my-app:
       # Set image: to whichever you are using
