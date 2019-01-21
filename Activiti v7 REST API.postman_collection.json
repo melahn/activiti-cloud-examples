@@ -501,6 +501,31 @@
 						{
 							"_postman_id": "0e53e2df-1e80-46c2-88c4-de32e230e6f5",
 							"name": "getProcessInstances - admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "af243f3a-d124-41ad-a166-e1288b3f7889",
+										"exec": [
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"postman.setEnvironmentVariable(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id); ",
+											"}",
+											"pm.test(\"Setting the processInstanceId.\", function () {",
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"pm.environment.set(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id);",
+											"} else",
+											"{",
+											"   pm.environment.set(\"processInstanceId\",\"unknown\"); ",
+											"}",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [
@@ -534,6 +559,31 @@
 				{
 					"_postman_id": "9486dd43-d703-4b90-9b85-425014b97f37",
 					"name": "getProcessInstances",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "af243f3a-d124-41ad-a166-e1288b3f7889",
+                                "exec": [
+                                  "var tokens = JSON.parse(responseBody);",
+                                  "if (tokens.page.totalElements != \"0\") {",
+                                  "postman.setEnvironmentVariable(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id); ",
+                                  "}",
+                                  "pm.test(\"Setting the processInstanceId.\", function () {",
+                                  "var tokens = JSON.parse(responseBody);",
+                                  "if (tokens.page.totalElements != \"0\") {",
+                                  "pm.environment.set(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id);",
+                                  "} else",
+                                  "{",
+                                  "   pm.environment.set(\"processInstanceId\",\"unknown\"); ",
+                                  "}",
+                                  "});",
+                                  ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -671,7 +721,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{gateway}}/rb-my-app/v1/process-instances/{processInstanceId}/variables",
+							"raw": "{{gateway}}/rb-my-app/v1/process-instances/{{processInstanceId}}/variables",
 							"host": [
 								"{{gateway}}"
 							],
@@ -679,7 +729,7 @@
 								"rb-my-app",
 								"v1",
 								"process-instances",
-								"{processInstanceId}",
+								"{{processInstanceId}}",
 								"variables"
 							]
 						}
@@ -1059,7 +1109,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{gateway}}/query/v1/process-instances/{processInstanceId}/variables",
+							"raw": "{{gateway}}/query/v1/process-instances/{{processInstanceId}}/variables",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1067,7 +1117,7 @@
 								"query",
 								"v1",
 								"process-instances",
-								"{processInstanceId}",
+								"{{processInstanceId}}",
 								"variables"
 							]
 						}
@@ -1624,6 +1674,31 @@
 						{
 							"_postman_id": "d3f56019-311e-4fcc-a17e-256d7fb8197a",
 							"name": "getProcessInstances",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "af243f3a-d124-41ad-a166-e1288b3f7889",
+										"exec": [
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"postman.setEnvironmentVariable(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id); ",
+											"}",
+											"pm.test(\"Setting the processInstanceId.\", function () {",
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"pm.environment.set(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id);",
+											"} else",
+											"{",
+											"   pm.environment.set(\"processInstanceId\",\"unknown\"); ",
+											"}",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [
@@ -1666,7 +1741,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{gateway}}/query/v1/process-instances/{processInstanceId}/variables",
+									"raw": "{{gateway}}/query/v1/process-instances/{{processInstanceId}}/variables",
 									"host": [
 										"{{gateway}}"
 									],
@@ -1674,7 +1749,7 @@
 										"query",
 										"v1",
 										"process-instances",
-										"{processInstanceId}",
+										"{{processInstanceId}}",
 										"variables"
 									]
 								}
@@ -1736,7 +1811,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{gateway}}/query/v1/process-instances/{processInstanceId}/variables",
+									"raw": "{{gateway}}/query/v1/process-instances/{{processInstanceId}}/variables",
 									"host": [
 										"{{gateway}}"
 									],
@@ -1744,7 +1819,7 @@
 										"query",
 										"v1",
 										"process-instances",
-										"{processInstanceId}",
+										"{{processInstanceId}}",
 										"variables"
 									]
 								}
@@ -1767,7 +1842,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{gateway}}/audit/v1/events?processInstanceId={processInstanceId}",
+									"raw": "{{gateway}}/audit/v1/events?processInstanceId={{processInstanceId}}",
 									"host": [
 										"{{gateway}}"
 									],
@@ -1779,7 +1854,7 @@
 									"query": [
 										{
 											"key": "processInstanceId",
-											"value": "{processInstanceId}"
+											"value": "{{processInstanceId}}"
 										}
 									]
 								}
@@ -1898,6 +1973,31 @@
 						{
 							"_postman_id": "90548e98-4b32-4418-a07e-d1accd5d163d",
 							"name": "getProcessInstances",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "af243f3a-d124-41ad-a166-e1288b3f7889",
+										"exec": [
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"postman.setEnvironmentVariable(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id); ",
+											"}",
+											"pm.test(\"Setting the processInstanceId.\", function () {",
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"pm.environment.set(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id);",
+											"} else",
+											"{",
+											"   pm.environment.set(\"processInstanceId\",\"unknown\"); ",
+											"}",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [
@@ -2149,6 +2249,31 @@
 						{
 							"_postman_id": "479142be-0727-438f-a0d8-e3a8eb094621",
 							"name": "getProcessInstances - admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "af243f3a-d124-41ad-a166-e1288b3f7889",
+										"exec": [
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"postman.setEnvironmentVariable(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id); ",
+											"}",
+											"pm.test(\"Setting the processInstanceId.\", function () {",
+											"var tokens = JSON.parse(responseBody);",
+											"if (tokens.page.totalElements != \"0\") {",
+											"pm.environment.set(\"processInstanceId\", tokens._embedded.cloudProcessInstanceImpls[0].id);",
+											"} else",
+											"{",
+											"   pm.environment.set(\"processInstanceId\",\"unknown\"); ",
+											"}",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [
@@ -2232,7 +2357,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{gateway}}/audit/admin/v1/events?processInstanceId={processInstanceId}",
+									"raw": "{{gateway}}/audit/admin/v1/events?processInstanceId={{processInstanceId}}",
 									"host": [
 										"{{gateway}}"
 									],
@@ -2245,7 +2370,7 @@
 									"query": [
 										{
 											"key": "processInstanceId",
-											"value": "{processInstanceId}"
+											"value": "{{processInstanceId}}"
 										}
 									]
 								}
@@ -2334,7 +2459,7 @@
 					"_postman_isSubFolder": true
 				}
 			],
-			"description": "This folder contains the neccesary calls, in the right order, to test the enforcement of the security policies "
+			"description": "This folder contains the necessary calls, in the right order, to test the enforcement of the security policies "
 		}
 	]
 }
